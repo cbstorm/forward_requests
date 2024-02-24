@@ -1,0 +1,8 @@
+version: '3.9'
+services:
+  forward_requests:
+    image: cbstorm/forward_requests:latest
+    ports:
+      - 8888:8888
+    env_file:
+      - ./.env

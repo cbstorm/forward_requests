@@ -6,6 +6,7 @@ import (
 
 	"github.com/cbstorm/forward_requests/configs"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/healthcheck"
 	"github.com/gofiber/fiber/v2/middleware/proxy"
 	"github.com/valyala/fasthttp"
@@ -26,6 +27,10 @@ func main() {
 	if app_config.ENV == "development" {
 		addr = fmt.Sprintf("%s%s", "localhost", addr)
 	}
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowHeaders: "Origin, Content-Type, Accept, X-Token, X-Refresh",
+	}))
 	app.Use(healthcheck.New())
 	app.Use(proxy.Balancer(proxy.Config{
 		Servers: app_config.SERVERS,
