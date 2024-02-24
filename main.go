@@ -29,7 +29,7 @@ func main() {
 	}
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "*",
-		AllowHeaders: "Origin, Content-Type, Accept, X-Token, X-Refresh",
+		AllowHeaders: "Origin, Content-Type, Accept, X-Token, X-Refresh, Ngrok-Skip-Browser-Warning",
 	}))
 	app.Use(healthcheck.New())
 	app.Use(proxy.Balancer(proxy.Config{
